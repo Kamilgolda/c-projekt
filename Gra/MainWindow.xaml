@@ -1,0 +1,535 @@
+﻿<Window x:Name="Game123" x:Class="Gra.Game"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gra"
+        mc:Ignorable="d"
+        Title="Game" Height="800" Width="1200" ResizeMode="NoResize" WindowStyle="None" HorizontalAlignment="Left" VerticalAlignment="Top" WindowStartupLocation="CenterScreen" Cursor="Cross" Visibility="Visible" Background="{x:Null}">
+    <Window.Resources>
+        <Storyboard x:Key="Miganietekstu">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="tbNickName" RepeatBehavior="Forever">
+                <EasingColorKeyFrame KeyTime="0:0:0.5" Value="White"/>
+                <EasingColorKeyFrame KeyTime="0:0:1" Value="Black"/>
+            </ColorAnimationUsingKeyFrames>
+
+        </Storyboard>
+        <Storyboard x:Key="Attention_Nick_Show">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Attention_Nick">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuarticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <QuarticEase EasingMode="EaseInOut"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="Attention_Nick" RepeatBehavior="Forever">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Collapsed}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="tbNickName">
+            <BeginStoryboard x:Name="Miganietekstu_BeginStoryboard" Storyboard="{StaticResource Miganietekstu}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="UIElement.GotMouseCapture" SourceName="tbNickName">
+            <StopStoryboard BeginStoryboardName="Miganietekstu_BeginStoryboard"/>
+            <StopStoryboard BeginStoryboardName="Miganietekstu_BeginStoryboard"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="bRozpocznij">
+            <BeginStoryboard x:Name="Attention_Nick_Show_BeginStoryboard" Storyboard="{StaticResource Attention_Nick_Show}"/>
+        </EventTrigger>
+
+    </Window.Triggers>
+
+
+
+
+    <Grid x:Name="Window" Cursor="Cross" HorizontalAlignment="Left" VerticalAlignment="Top" >
+        <Grid x:Name="Menu" Cursor="Cross" Width="1200" Height="800" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Top" >
+            <Grid.Background>
+                <ImageBrush ImageSource="Skins/Bars/menu_background.png"/>
+            </Grid.Background>
+            <Button x:Name="bRozpocznij" Content="Rozpocznij" HorizontalAlignment="Center" Margin="362,486,362,245" VerticalAlignment="Center" Width="476" Height="69" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="48" Click="B_Rozpocznij_Click" Opacity="0.85" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Skins/Bars/pole.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="bUstawienia" Content="Ustawienia" HorizontalAlignment="Center" Margin="362,584,362,147" VerticalAlignment="Center" Width="476" Height="69" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="48" Click="B_Ustawienia_Click" Opacity="0.85" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Skins/Bars/pole.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="bZamknij" Content="Zamknij" HorizontalAlignment="Center" Margin="362,675,362,56" VerticalAlignment="Center" Width="476" Height="69" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="48" Click="B_zamknij_Click" Opacity="0.85" BorderBrush="{x:Null}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Skins/Bars/pole.png"/>
+                </Button.Background>
+            </Button>
+            <Label x:Name="Attention_Nick" Content="Aby kontynuować wprowadź nick (zakres długości od 4 do 16 znaków)" HorizontalAlignment="Center" Margin="321.2,338,321.2,0" VerticalAlignment="Top" Height="46.8" Width="557.6" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center" Visibility="Collapsed">
+                <Label.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="Black"/>
+                        <GradientStop Color="Red" Offset="1"/>
+                        <GradientStop Color="#FFAE2C2C" Offset="0.452"/>
+                    </LinearGradientBrush>
+                </Label.Foreground>
+            </Label>
+            <TextBox x:Name="tbNickName"  x:FieldModifier="public" HorizontalAlignment="Left" Height="53" Margin="362,409,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="476" FontFamily="Visitor TT1 BRK" FontSize="48" Text="Twój Nick:" GotMouseCapture="TB_NickName_GotMouseCapture" UndoLimit="20" MaxLength="16" BorderBrush="{x:Null}" Opacity="0.85" />
+
+        </Grid>
+        <Grid x:Name="Ustawienia" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Cross" Background="#FFC22B2B" Height="800" Margin="0" Width="1200" Grid.Column="2" Visibility="Collapsed" >
+            <Button x:Name="bWstecz" Content="Wstecz" HorizontalAlignment="Center" Margin="362,675,362,56" VerticalAlignment="Center" Width="476" Height="69" Cursor="Arrow" FontFamily="Visitor TT1 BRK" FontSize="48" Click="B_wstecz_Click" />
+        </Grid>
+        <Grid x:Name="Choose_Character" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Cross"  Background="#FF082600" Height="800" Margin="0" Width="1200" Grid.Column="2" Visibility="Collapsed" >
+
+            <Button x:Name="Character1" Content="Wojownik" HorizontalAlignment="Left"  VerticalAlignment="Bottom" Width="300" Height="69" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="48" Click="Character1_Click" Margin="60,0,0,150" />
+            <Rectangle HorizontalAlignment="Left" Height="500" Margin="60,50,0,0" VerticalAlignment="Top" Width="300" OpacityMask="Black" Stroke="Black" StrokeThickness="5" Fill="#FF780E0C"/>
+            <Rectangle HorizontalAlignment="Left" Height="500" Margin="60,50,0,0" VerticalAlignment="Top" Width="300" OpacityMask="Black" Stroke="Black">
+
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Skins/Warrior/Run/Back/0_Warrior_Run_14.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Button x:Name="Character2" Content="Mag" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="300" Height="69" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="48" Click="Character2_Click" Margin="0,0,0,150" />
+            <Rectangle HorizontalAlignment="Center" Height="500" Margin="0,50,0,0" VerticalAlignment="Top" Width="300" OpacityMask="Black" Fill="#FF780E0C" Stroke="Black" StrokeThickness="5"/>
+            <Rectangle HorizontalAlignment="Center" Height="500" Margin="0,50,0,0" VerticalAlignment="Top" Width="300" OpacityMask="Black"  Stroke="Black">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Skins/Wizard\Run\Back_Forward\0.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Button x:Name="Character3" Content="Paladyn" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="300" Height="69" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="48" Click="Character3_Click" Margin="0,0,60,150" />
+            <Rectangle HorizontalAlignment="Right" Height="500" Margin="0,50,60,0" VerticalAlignment="Top" Width="300" OpacityMask="Black" Fill="#FF780E0C" Stroke="Black" StrokeThickness="5"/>
+            <Rectangle HorizontalAlignment="Right" Height="500" Margin="0,50,60,0" VerticalAlignment="Top" Width="300" OpacityMask="Black"  Stroke="Black" >
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Skins/Knight\Run\Left\0.png" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Button x:Name="bApprove_Character" Content="Potwierdz" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="480" Height="69" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="48" Click="B_Approve_Character_Click" Margin="364,0,360,40" FontWeight="Bold" />
+
+
+        </Grid>
+        <Grid x:Name="Start_the_game" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Cross" Background="#FFE82B2B" Height="800" Margin="0" Width="1200" Grid.Column="2" Visibility="Collapsed">
+            <Canvas x:Name="player_area" Height="800" Width="1200" HorizontalAlignment="Left" VerticalAlignment="Bottom" KeyDown="Player_area_KeyDown">
+                <Grid x:Name="mapa" HorizontalAlignment="Left" VerticalAlignment="Bottom" Canvas.Bottom="0" Canvas.Left="-53">
+                    <Canvas x:Name="map_area" Height="8000" Width="12000" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <Image x:Name="map" Source="maps/mapa.png" Stretch="Fill" Width="12000" Height="8000" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                        <Grid x:Name="npc0_g" Canvas.Left="354" Canvas.Top="6887" Height="179">
+                            <Image x:Name="npc0" Source="Skins/NPC/Major/Major_0.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Bottom"  MouseDown="Npc_MouseDown" />
+                            <Label Content="Major lvl(30)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="130" FontSize="14" Foreground="#FF2BFF00"/>
+                        </Grid>
+                        <Grid x:Name="npc1_g"  Canvas.Left="800" Canvas.Bottom="2000" Height="202" Canvas.Top="3659" Width="266" Visibility="Collapsed">
+                            <Image x:Name="npc1" Source="Skins/NPC/Zubr/zubr.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Npc_MouseDown" Width="266" Height="173"/>
+                            <Label Content="Żubr lvl(10)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Width="266"/>
+                        </Grid>
+                        <Grid x:Name="npc2_g" Canvas.Left="2435" Canvas.Top="5694" Height="180">
+                            <Image x:Name="npc2" Source="Skins/NPC/Astrolog/Astrolog_1.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Bottom"  MouseDown="Npc_MouseDown" />
+                            <Label Content="Astrolog lvl(40)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="130" FontSize="14" Foreground="#FF2BFF00"/>
+                        </Grid>
+                        <Grid x:Name="npc3_g" Canvas.Left="1251" Canvas.Top="4681" Height="180">
+                            <Image x:Name="npc3" Source="Skins/NPC/Nieznajomy\Nieznajomy_1.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Bottom"  MouseDown="Npc_MouseDown" />
+                            <Label Content="Nieznajomy lvl(5)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Width="130" FontSize="14" Foreground="#FF2BFF00"/>
+                        </Grid>
+
+                        <Grid x:Name="dog0_g" Canvas.Left="1740" Canvas.Bottom="1500" Height="117" Canvas.Top="6618">
+                            <Image x:Name="dog0" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+
+                        <Grid x:Name="dog1_g"  Canvas.Left="2863" Canvas.Bottom="1800" Height="117" Canvas.Top="6331">
+                            <Image x:Name="dog1" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="dog2_g" Canvas.Left="3447" Canvas.Bottom="2100" Height="117" Canvas.Top="4744">
+                            <Image x:Name="dog2" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="dog3_g" Canvas.Left="2063" Canvas.Bottom="1500" Height="117" Canvas.Top="7805">
+                            <Image x:Name="dog3" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="dog4_g" Canvas.Left="2063" Canvas.Bottom="1800" Height="117" Canvas.Top="6126">
+                            <Image x:Name="dog4" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="dog5_g" Canvas.Left="2063" Canvas.Bottom="2100" Height="117" Canvas.Top="5089">
+                            <Image x:Name="dog5" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="dog6_g" Canvas.Left="3510" Canvas.Bottom="1650" Height="117" Canvas.Top="5555">
+                            <Image x:Name="dog6" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="dog7_g" Canvas.Left="3564" Canvas.Bottom="2000" Height="117" Canvas.Top="6671">
+                            <Image x:Name="dog7" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="dog8_g" Canvas.Left="2234" Canvas.Bottom="1650" Height="117" Canvas.Top="7139">
+                            <Image x:Name="dog8" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="dog9_g"  Canvas.Left="3391" Canvas.Bottom="2000" Height="117" Canvas.Top="7600">
+                            <Image x:Name="dog9" Source="Skins/Enemies/Pies/dog_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Wściekły Pies lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="chicken0_g"  Canvas.Left="1594" Canvas.Bottom="2000" Height="117" Canvas.Top="4506">
+                            <Image x:Name="chicken0" Source="Skins/Enemies/Kurczak\kurczak_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="120" Height="100" Margin="35,0,0,0"/>
+                            <Label Content="Kurczak Somsiada lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="chicken1_g"  Canvas.Left="1480" Canvas.Bottom="2000" Height="117" Canvas.Top="4623">
+                            <Image x:Name="chicken1" Source="Skins/Enemies/Kurczak\kurczak_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="120" Height="100" Margin="35,0,0,0"/>
+                            <Label Content="Kurczak Somsiada lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="chicken2_g"  Canvas.Left="1754" Canvas.Bottom="2000" Height="117" Canvas.Top="4429">
+                            <Image x:Name="chicken2" Source="Skins/Enemies/Kurczak\kurczak_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="120" Height="100" Margin="35,0,0,0"/>
+                            <Label Content="Kurczak Somsiada lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="chicken3_g"  Canvas.Left="1640" Canvas.Bottom="2000" Height="117" Canvas.Top="4628">
+                            <Image x:Name="chicken3" Source="Skins/Enemies/Kurczak\kurczak_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="120" Height="100" Margin="35,0,0,0"/>
+                            <Label Content="Kurczak Somsiada lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="chicken4_g"  Canvas.Left="1795" Canvas.Bottom="2000" Height="117" Canvas.Top="4551">
+                            <Image x:Name="chicken4" Source="Skins/Enemies/Kurczak\kurczak_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="120" Height="100" Margin="35,0,0,0"/>
+                            <Label Content="Kurczak Somsiada lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="chicken5_g"  Canvas.Left="1525" Canvas.Bottom="2000" Height="117" Canvas.Top="4744">
+                            <Image x:Name="chicken5" Source="Skins/Enemies/Kurczak\kurczak_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="120" Height="100" Margin="35,0,0,0"/>
+                            <Label Content="Kurczak Somsiada lvl(1)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="deer0_g"  Canvas.Left="3008" Canvas.Bottom="2000" Height="117" Canvas.Top="4037">
+                            <Image x:Name="deer0" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer1_g"  Canvas.Left="2682" Canvas.Bottom="2000" Height="117" Canvas.Top="3787">
+                            <Image x:Name="deer1" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer2_g"  Canvas.Left="2509" Canvas.Bottom="2000" Height="117" Canvas.Top="4429">
+                            <Image x:Name="deer2" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer3_g"  Canvas.Left="3718" Canvas.Bottom="2000" Height="117" Canvas.Top="4551">
+                            <Image x:Name="deer3" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer4_g"  Canvas.Left="3091" Canvas.Bottom="2000" Height="117" Canvas.Top="4409">
+                            <Image x:Name="deer4" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer5_g"  Canvas.Left="2863" Canvas.Bottom="2000" Height="117" Canvas.Top="4841">
+                            <Image x:Name="deer5" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer6_g"  Canvas.Left="1740" Canvas.Bottom="2000" Height="117" Canvas.Top="3394">
+                            <Image x:Name="deer6" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer7_g"  Canvas.Left="3091" Canvas.Bottom="2000" Height="117" Canvas.Top="3154">
+                            <Image x:Name="deer7" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer8_g"  Canvas.Left="2544" Canvas.Bottom="2000" Height="117" Canvas.Top="2926">
+                            <Image x:Name="deer8" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="deer9_g"  Canvas.Left="1795" Canvas.Bottom="2000" Height="117" Canvas.Top="2511">
+                            <Image x:Name="deer9" Source="Skins/Enemies/Jelen\jelen_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Smutny Lejeń lvl(2)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+                        <Grid x:Name="boar0_g"  Canvas.Left="1251" Canvas.Bottom="2000" Height="117" Canvas.Top="2239">
+                            <Image x:Name="boar0" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar1_g"  Canvas.Left="1379" Canvas.Bottom="2000" Height="117" Canvas.Top="1580">
+                            <Image x:Name="boar1" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar2_g"  Canvas.Left="733" Canvas.Bottom="2000" Height="117" Canvas.Top="1961">
+                            <Image x:Name="boar2" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar3_g"  Canvas.Left="238" Canvas.Bottom="2000" Height="117" Canvas.Top="1442">
+                            <Image x:Name="boar3" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar4_g"  Canvas.Left="733" Canvas.Bottom="2000" Height="117" Canvas.Top="895">
+                            <Image x:Name="boar4" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar5_g"  Canvas.Left="1480" Canvas.Bottom="2000" Height="117" Canvas.Top="413">
+                            <Image x:Name="boar5" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar6_g"  Canvas.Left="2063" Canvas.Bottom="2000" Height="117" Canvas.Top="992">
+                            <Image x:Name="boar6" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar7_g"  Canvas.Left="450" Canvas.Bottom="2000" Height="117" Canvas.Top="158">
+                            <Image x:Name="boar7" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar8_g"  Canvas.Left="2509" Canvas.Bottom="2000" Height="117" Canvas.Top="255">
+                            <Image x:Name="boar8" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+                        <Grid x:Name="boar9_g"  Canvas.Left="2682" Canvas.Bottom="2000" Height="117" Canvas.Top="1270">
+                            <Image x:Name="boar9" Source="Skins/Enemies/Dzik\dzik_1.png" HorizontalAlignment="Left" VerticalAlignment="Bottom" MouseDown="Enemy_MouseDown" Width="130" Height="100"/>
+                            <Label Content="Głodny Dzik lvl(4)" HorizontalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Foreground="#FF2BFF00" Height="30" Margin="0,0,-0.4,0"/>
+                        </Grid>
+
+
+                    </Canvas>
+                </Grid>
+
+                <Image x:Name="player" Height="200" Width="200" HorizontalAlignment="Left" VerticalAlignment="Bottom" Stretch="Fill" Canvas.Left="500" Canvas.Bottom="300" />
+                <Label x:Name="player_name" Content="Nick lvl(10)" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="35" Width="200" Foreground="White" FontFamily="Visitor TT1 BRK" FontSize="20" FontWeight="Bold" BorderBrush="White" OpacityMask="#FF43EB51" Canvas.Left="500" Canvas.Top="765"/>
+
+
+
+            </Canvas>
+            <Grid x:Name="death" Width="800" Height="500" Opacity="0.8" Visibility="Collapsed">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Label Content="Nie żyjesz" HorizontalAlignment="Left" Margin="218,44,0,0" VerticalAlignment="Top" Cursor="Cross" Foreground="Red" FontWeight="Bold" FontSize="72" FontFamily="Segoe Print"/>
+                <Button x:Name="respawn" Content="Respawn" HorizontalAlignment="Left" Margin="262,325,0,0" VerticalAlignment="Top" Width="263" BorderBrush="{x:Null}" Height="66" Foreground="#FFF30000" FontSize="36" FontFamily="MV Boli" Click="Respawn_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Skins/Bars/pole.png"/>
+                    </Button.Background>
+                </Button>
+
+            </Grid>
+            <Grid x:Name="Talk" Visibility="Hidden">
+                <Rectangle Width="500" Height="500" RenderTransformOrigin="0.5,0.5" RadiusX="10" RadiusY="100" Opacity="0.835">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="Skins/Bars/quests.png"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Button x:Name="ZaakceptujQ" Content="Zaakceptuj" HorizontalAlignment="Left" Margin="378,490,0,0" VerticalAlignment="Top" Width="437" BorderBrush="{x:Null}" Height="63" RenderTransformOrigin="0.496,0.231" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="36" FontWeight="Bold" FontStyle="Italic" VerticalContentAlignment="Top" AutomationProperties.Name="ZaakceptujQ" Click="ZaakceptujQ_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Skins/Buttons/dialog.png"/>
+                    </Button.Background>
+
+                </Button>
+                <Button x:Name="OdrzućQ" Content="Odrzuć" HorizontalAlignment="Left" Margin="378,553,0,0" VerticalAlignment="Top" Width="437" BorderBrush="{x:Null}" Height="64" RenderTransformOrigin="0.496,0.231" Cursor="Cross" FontFamily="Visitor TT1 BRK" FontSize="36" FontWeight="Bold" FontStyle="Italic" VerticalContentAlignment="Top" Foreground="Black" AutomationProperties.Name="OdrzućQ" Click="OdrzućQ_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Skins/Buttons/dialog.png"/>
+                    </Button.Background>
+                </Button>
+
+                <ScrollViewer x:Name="q_scroll" VerticalScrollBarVisibility="Hidden"  Width="400" Height="240" Margin="399,193,401,367" >
+                    <TextBlock x:Name="TekstQ" VerticalAlignment="Top" TextWrapping="Wrap" FontSize="25" Text="text" Width="auto" Height="auto" FontFamily="Monotype Corsiva" Foreground="White" />
+
+                </ScrollViewer>
+                <TextBlock x:Name="TekstQ_short" TextAlignment="Center"  TextWrapping="Wrap" FontSize="25" Text="text" FontFamily="Visitor TT1 BRK" Foreground="White" Margin="389,438,401,315" Width="410"/>
+
+            </Grid>
+
+            <Image Margin="0,0,0,711.006" Source="Skins/Bars/up.png" Stretch="Fill"/>
+
+            <Image Margin="10,1.98,1097.8,771.82" Source="Skins/Bars/pole.png" Stretch="Fill"/>
+            <Label x:Name="Hp_Game" Content="HP:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" FontFamily="Visitor TT1 BRK" FontSize="20" Background="{x:Null}" Foreground="White" Width="92.2"/>
+            <Image Margin="116,1.98,716,772"  Source="Skins/Bars/pole2.png" Stretch="Fill"/>
+            <Image x:Name="BarHp" Margin="118,4.18,716,772"   Source="Skins/Bars/hpbar.png" Stretch="Fill" Height="24"/>
+
+            <Image Margin="693,1.98,392,771.82" Source="Skins/Bars/pole.png" Stretch="Fill"/>
+            <Label x:Name="Exp_Game" Content="EXP:" HorizontalAlignment="Left" Margin="693,1.98,0,0" VerticalAlignment="Top" FontFamily="Visitor TT1 BRK" FontSize="20" Background="{x:Null}" Foreground="White" Width="115"/>
+            <Image Margin="815,1.98,18,771.82" Source="Skins/Bars/pole2.png" Stretch="Fill"/>
+            <Image x:Name="BarExp" Margin="815,4.18,19,771.82" Source="Skins/Bars/expbar.png" Stretch="Fill" Height="24"/>
+
+            <Image Margin="531.2,0,548.594,683.4" Source="Skins/Bars/lvl.png" Stretch="Fill"/>
+            <Label x:Name="Lvl_Game" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="557,42,0,0" VerticalAlignment="Top" Height="65" Width="70" FontSize="55" FontFamily="Visitor TT1 BRK" Foreground="White"/>
+
+            <Image Margin="10,33.18,1049.8,740.62" Source="Skins/Bars/pole.png" Stretch="Fill"/>
+            <Label x:Name="Attack_Game" Content="Attack:" HorizontalAlignment="Left" Margin="10,33.18,0,0" VerticalAlignment="Top" FontFamily="Visitor TT1 BRK" FontSize="20" Background="{x:Null}" Foreground="White" Width="176.2"/>
+
+            <Image Margin="170,33.18,801.8,740.62" Source="Skins/Bars/pole.png" Stretch="Fill"/>
+            <Label x:Name="SpeedAttack_Game" Content="Speed Attack:" HorizontalAlignment="Left" Margin="178,33.18,0,0" VerticalAlignment="Top" FontFamily="Visitor TT1 BRK" FontSize="20" Background="{x:Null}" Foreground="White" Width="220.2"/>
+
+            <Image Margin="693,40.29,377.2,733.51" Source="Skins/Bars/pole.png" Stretch="Fill"/>
+            <Label x:Name="Armor_Game" Content="Armor: " HorizontalAlignment="Left" Margin="693,40.673,0,0" VerticalAlignment="Top" FontFamily="Visitor TT1 BRK" FontSize="20" Background="{x:Null}" Foreground="White" Width="176.2"/>
+
+            <Image Margin="927,40.29,26,733.51" Source="Skins/Bars/pole.png" Stretch="Fill"/>
+            <Label x:Name="xy" Content="" Canvas.Left="667.4" Canvas.Top="131.6" Height="40" FontSize="20" Foreground="#FFEEEEEE" Margin="1009,33,10,727"/>
+            <Label Content="X / Y: " HorizontalAlignment="Left" Margin="930,38,0,0" VerticalAlignment="Top" FontFamily="Visitor TT1 BRK" FontSize="20" Background="{x:Null}" Foreground="White" Width="79"/>
+
+            <Grid x:Name="Okno_quest" Visibility="Hidden">
+                <Rectangle Width="500" Height="500" RenderTransformOrigin="0.5,0.5" RadiusX="10" RadiusY="100" Opacity="0.835">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="Skins/Bars/quests.png"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Button x:Name="Okno_quest_close" Content="" HorizontalAlignment="Left" Margin="759,159,0,0" VerticalAlignment="Top" Width="50" Height="50" Opacity="0.9" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="Okno_quest_close_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Skins/Buttons/close.png"/>
+                    </Button.Background>
+                </Button>
+                <StackPanel HorizontalAlignment="Left" Height="400" Margin="389,193,0,0" VerticalAlignment="Top" Width="420">
+                    <Label x:Name="L_q1" Height="60" Margin="10,0" FontSize="20" FontFamily="Visitor TT1 BRK" Foreground="White"/>
+                    <Label x:Name="L_q2" Height="60" Margin="10,0" FontSize="20" FontFamily="Visitor TT1 BRK" Foreground="White"/>
+                    <Label x:Name="L_q3" Height="60" Margin="10,0" FontSize="20" FontFamily="Visitor TT1 BRK" Foreground="White"/>
+                    <Label x:Name="L_q4" Height="60" Margin="10,0" FontSize="20" FontFamily="Visitor TT1 BRK" Foreground="White"/>
+                    <Label x:Name="L_q5" Height="60" Margin="10,0" FontSize="20" FontFamily="Visitor TT1 BRK" Foreground="White"/>
+                    <Label x:Name="L_q6" Height="60" Margin="10,0" FontSize="20" FontFamily="Visitor TT1 BRK" Foreground="White"/>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="Esc" Visibility="Hidden">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Skins/Bars/menu_background.png"/>
+                </Grid.Background>
+                
+                <Button Content="Wyjdź z gry" HorizontalAlignment="Left" Margin="390,649,0,0" VerticalAlignment="Top" Width="411" FontSize="48" Height="79" FontFamily="Visitor TT1 BRK" Foreground="White" Click="B_zamknij_Click">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Skins/Bars/quests.png"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="Powrót" HorizontalAlignment="Left" Margin="390,447,0,0" VerticalAlignment="Top" Width="411" FontSize="48" Height="79" FontFamily="Visitor TT1 BRK" Foreground="White" Click="Powrót">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Skins/Bars/quests.png"/>
+                    </Button.Background>
+                </Button>
+                <Button Content="Najlepsi gracze" HorizontalAlignment="Left" Margin="390,548,0,0" VerticalAlignment="Top" Width="411" FontSize="28" Height="79" FontFamily="Visitor TT1 BRK" Foreground="White" Click="Eksportuj_Statystyki">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Skins/Bars/quests.png"/>
+                    </Button.Background>
+                </Button>
+
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="OknoWalki" Width="1200" Height="800" Visibility="Collapsed" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+
+            <Border Width="350"  HorizontalAlignment="Right">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="-104.036" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF171108" Offset="0.987"/>
+                        <GradientStop Color="#FF362A18" Offset="0.769"/>
+                        <GradientStop Color="#FF382C18" Offset="0.025"/>
+                        <GradientStop Color="#FF231B0F" Offset="0.538"/>
+                        <GradientStop Color="#FF251A0B" Offset="0.294"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid x:Name="Statystyki" HorizontalAlignment="Right" Height="480" Width="330" Margin="10,10,10,10" VerticalAlignment="Top" Grid.RowSpan="1"  >
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="145.176" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF23AA07" Offset="0.538"/>
+                            <GradientStop Color="#FF0A3102"/>
+                            <GradientStop Color="#FF0A3102" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+
+                    <Label x:Name="nickstat" Content="nick" Height="40" Margin="10,15,92,0" VerticalAlignment="Top" Width="228" Foreground="#FFBDBD31"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="24"  />
+                    <Label x:Name="lvlstat" Content="lvl" Height="40" Margin="0,15,0,0" VerticalAlignment="Top" Width="92" Foreground="#FFBDBD31"  HorizontalAlignment="Right" HorizontalContentAlignment="Center" FontSize="24"  />
+
+                    <Label  Content="HP: " Height="40" Margin="10,60,0,0" VerticalAlignment="Top" Width="119" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="hpstat" Content="Hp/maxhp" Height="40" Margin="144,60,0,0" VerticalAlignment="Top" Width="186" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"   />
+
+                    <Label  Content="Atak : " Height="40" Margin="10,100,0,0" VerticalAlignment="Top" Width="119" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="attackstat" Content="atak" Height="40" Margin="139,100,0,0" VerticalAlignment="Top" Width="191" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"   />
+
+                    <Label  Content="Pancerz : " Height="40" Margin="5,140,0,0" VerticalAlignment="Top" Width="124" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="armorstat" Content="armor" Height="40" Margin="149,140,0,0" VerticalAlignment="Top" Width="181" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"   />
+
+                    <Label  Content="Szybkosc : " Height="40" Margin="5,180,0,0" VerticalAlignment="Top" Width="124" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="sastat" Content="sa" Height="40" Margin="149,180,0,0" VerticalAlignment="Top" Width="181" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="nickstat_e" Content="nick" Height="40" Margin="10,265,92,0" VerticalAlignment="Top" Width="228" Foreground="#FFBDBD31"  HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="24"  />
+                    <Label x:Name="lvlstat_e" Content="lvl" Height="40" Margin="0,265,6,0" VerticalAlignment="Top" Width="86" Foreground="#FFBDBD31"  HorizontalAlignment="Right" HorizontalContentAlignment="Center" FontSize="24"  />
+                    <Label  Content="HP: " Height="40" Margin="5,310,0,0" VerticalAlignment="Top" Width="119" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="hpstat_e" Content="Hp/maxhp" Height="40" Margin="144,310,0,0" VerticalAlignment="Top" Width="186" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label  Content="Atak : " Height="40" Margin="5,350,0,0" VerticalAlignment="Top" Width="119" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="attackstat_e" Content="atak" Height="40" Margin="139,350,0,0" VerticalAlignment="Top" Width="191" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label  Content="Pancerz : " Height="40" Margin="0,390,0,0" VerticalAlignment="Top" Width="124" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="armorstat_e" Content="armor" Height="40" Margin="149,390,0,0" VerticalAlignment="Top" Width="181" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label  Content="Szybkosc : " Height="40" Margin="0,430,0,0" VerticalAlignment="Top" Width="124" Foreground="White" HorizontalAlignment="Left" HorizontalContentAlignment="Center" FontSize="20"   />
+                    <Label x:Name="sastat_e" Content="sa" Height="40" Margin="149,430,0,0" VerticalAlignment="Top" Width="181" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20"   />
+
+                </Grid>
+
+            </Border>
+
+            <Border Grid.Row="1" BorderThickness="0" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                <RotateTransform Angle="-104.036" CenterY="0.5" CenterX="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF171108" Offset="0.987"/>
+                        <GradientStop Color="#FF362A18" Offset="0.769"/>
+                        <GradientStop Color="#FF382C18" Offset="0.025"/>
+                        <GradientStop Color="#FF231B0F" Offset="0.538"/>
+                        <GradientStop Color="#FF251A0B" Offset="0.294"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <ScrollViewer x:Name="wysw_viewer" HorizontalScrollBarVisibility="Auto"  VerticalScrollBarVisibility="Auto" Margin="10,10,600,10" Grid.Row="1" CanContentScroll="True" Background="#FF0D3E00" Foreground="White" VerticalContentAlignment="Bottom" Width="590" >
+                    <TextBlock x:Name="wyswietlacz" HorizontalAlignment="Left" Padding="10" TextWrapping="Wrap" Text="xxx " VerticalAlignment="Top" Width="450" Foreground="#FFBDBD31" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Visible" UseLayoutRounding="False" FontSize="22" />
+                </ScrollViewer>
+
+            </Border>
+
+            <StackPanel HorizontalAlignment="Left" Height="280" Margin="610,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="580" Background="#FF082600">
+
+                <Button x:Name="Atak" Content="Szybki Atak"  Height="70"   Width="300"  Background="#780e0c" Foreground="#FFC0882C" Margin="10,15,0,0" HorizontalAlignment="Center" FontSize="24" FontFamily="Visitor TT1 BRK" FontWeight="Bold" Click="Atak_Click"/>
+                <Button x:Name="Silny_Atak" Content="silny atak"  Height="70"   Width="300"  Background="#780e0c" Foreground="#FFC0882C" Margin="10,15,0,0" HorizontalAlignment="Center" FontSize="24" FontFamily="Visitor TT1 BRK" FontWeight="Bold" Click="Silny_Atak_Click"/>
+                <Button x:Name="zamknijokno" Content="Zamknij"  Height="70"   Width="300"  Background="#780e0c" Foreground="#FFC0882C" Margin="10,15,0,0" HorizontalAlignment="Center" FontSize="24" FontFamily="Visitor TT1 BRK" FontWeight="Bold" Click="zamknijokno_Click"/>
+
+            </StackPanel>
+            <Grid x:Name="fight" Margin="0,0,350,0" Background="Black">
+
+                <MediaElement x:Name="background_fight" LoadedBehavior="Manual" UnloadedBehavior="Stop"/>
+                <Image x:Name="enemy_f" Margin="463,121.6,151,147.2"/>
+                <Image x:Name="player_f" Margin="90.2,121.6,515.8,147.2"/>
+            </Grid>
+        </Grid>
+
+
+    </Grid>
+</Window>

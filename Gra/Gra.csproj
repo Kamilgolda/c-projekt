@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{284C3B65-E392-4228-98E3-5EF6FE01C8DF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Gra</RootNamespace>
+    <AssemblyName>Gra</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="IEnemies.cs" />
+    <Compile Include="Quests.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ICharacters.cs" />
+    <Compile Include="Db.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Menu.cs" />
+    <Compile Include="NPC.cs" />
+    <Compile Include="Poruszanie.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Maps\mapa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Maps\collision_map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_0.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_1.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_2.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_3.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_4.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_5.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_6.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_7.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_8.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_9.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_10.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_11.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_12.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_13.png" />
+    <Resource Include="Skins\Warrior\Run\Forward\0_Warrior_Run_14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_0.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_1.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_10.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_11.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_12.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_13.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_14.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_2.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_3.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_4.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_5.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_6.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_7.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_8.png" />
+    <Resource Include="Skins\Warrior\Run\Back\0_Warrior_Run_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skins\NPC\Major\Major_0.png" />
+    <Resource Include="Skins\NPC\Major\Major_1.png" />
+    <Resource Include="Skins\NPC\Major\Major_10.png" />
+    <Resource Include="Skins\NPC\Major\Major_11.png" />
+    <Resource Include="Skins\NPC\Major\Major_12.png" />
+    <Resource Include="Skins\NPC\Major\Major_13.png" />
+    <Resource Include="Skins\NPC\Major\Major_14.png" />
+    <Resource Include="Skins\NPC\Major\Major_15.png" />
+    <Resource Include="Skins\NPC\Major\Major_16.png" />
+    <Resource Include="Skins\NPC\Major\Major_17.png" />
+    <Resource Include="Skins\NPC\Major\Major_18.png" />
+    <Resource Include="Skins\NPC\Major\Major_19.png" />
+    <Resource Include="Skins\NPC\Major\Major_2.png" />
+    <Resource Include="Skins\NPC\Major\Major_20.png" />
+    <Resource Include="Skins\NPC\Major\Major_21.png" />
+    <Resource Include="Skins\NPC\Major\Major_22.png" />
+    <Resource Include="Skins\NPC\Major\Major_23.png" />
+    <Resource Include="Skins\NPC\Major\Major_24.png" />
+    <Resource Include="Skins\NPC\Major\Major_25.png" />
+    <Resource Include="Skins\NPC\Major\Major_26.png" />
+    <Resource Include="Skins\NPC\Major\Major_27.png" />
+    <Resource Include="Skins\NPC\Major\Major_28.png" />
+    <Resource Include="Skins\NPC\Major\Major_29.png" />
+    <Resource Include="Skins\NPC\Major\Major_3.png" />
+    <Resource Include="Skins\NPC\Major\Major_4.png" />
+    <Resource Include="Skins\NPC\Major\Major_5.png" />
+    <Resource Include="Skins\NPC\Major\Major_6.png" />
+    <Resource Include="Skins\NPC\Major\Major_7.png" />
+    <Resource Include="Skins\NPC\Major\Major_8.png" />
+    <Resource Include="Skins\NPC\Major\Major_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_0.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_1.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_10.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_11.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_12.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_13.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_14.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_2.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_3.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_4.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_5.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_6.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_7.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_8.png" />
+    <Resource Include="Skins\Warrior\Run\Left\0_Warrior_Run_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_0.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_1.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_10.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_11.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_12.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_13.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_14.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_2.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_3.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_4.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_5.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_6.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_7.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_8.png" />
+    <Resource Include="Skins\Warrior\Run\Right\0_Warrior_Run_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skins\Enemies\Pies\dog.png" />
+    <Resource Include="Skins\Buttons\dialog.png" />
+    <Resource Include="Skins\Bars\up.png" />
+    <Resource Include="Skins\Bars\expbar.png" />
+    <Resource Include="Skins\Bars\pole.png" />
+    <Resource Include="Skins\Bars\pole2.png" />
+    <Resource Include="Skins\Bars\lvl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Skins\Bars\hpbar.png" />
+    <Resource Include="Skins\NPC\Zubr\zubr.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_1.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_2.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_3.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_4.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_5.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_6.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_7.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_8.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_left_1.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_left_2.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_left_3.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_left_4.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_left_5.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_left_6.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_right_1.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_right_2.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_right_3.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_right_4.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_right_5.png" />
+    <Resource Include="Skins\Enemies\Dzik\dzik_right_6.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_1.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_10.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_11.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_12.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_13.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_14.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_15.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_16.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_17.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_18.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_19.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_2.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_20.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_3.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_4.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_5.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_6.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_7.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_8.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_9.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_left_1.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_left_2.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_left_3.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_left_4.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_left_5.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_left_6.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_left_7.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_left_8.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_right_1.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_right_2.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_right_3.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_right_4.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_right_5.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_right_6.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_right_7.png" />
+    <Resource Include="Skins\Enemies\Jelen\jelen_right_8.png" />
+    <Resource Include="Skins\Enemies\Kurczak\kurczak_1.png" />
+    <Resource Include="Skins\Enemies\Kurczak\kurczak_left_1.png" />
+    <Resource Include="Skins\Enemies\Kurczak\kurczak_left_2.png" />
+    <Resource Include="Skins\Enemies\Kurczak\kurczak_left_3.png" />
+    <Resource Include="Skins\Enemies\Kurczak\kurczak_right_1.png" />
+    <Resource Include="Skins\Enemies\Kurczak\kurczak_right_2.png" />
+    <Resource Include="Skins\Enemies\Kurczak\kurczak_right_3.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_1.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_10.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_11.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_12.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_13.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_14.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_15.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_16.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_17.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_18.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_19.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_2.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_20.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_21.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_22.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_23.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_24.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_25.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_26.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_27.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_28.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_29.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_3.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_30.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_4.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_5.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_6.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_7.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_8.png" />
+    <Resource Include="Skins\NPC\Nieznajomy\Nieznajomy_9.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_1.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_10.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_11.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_12.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_13.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_14.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_15.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_16.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_17.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_18.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_19.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_2.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_20.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_21.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_22.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_23.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_24.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_25.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_26.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_27.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_28.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_29.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_3.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_30.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_4.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_5.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_6.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_7.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_8.png" />
+    <Resource Include="Skins\NPC\Astrolog\Astrolog_9.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\0.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\1.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\2.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\3.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\4.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\5.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\6.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\7.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\8.png" />
+    <Resource Include="Skins\Knight\Run\Back_Forward\9.png" />
+    <Resource Include="Skins\Knight\Run\Left\0.png" />
+    <Resource Include="Skins\Knight\Run\Left\1.png" />
+    <Resource Include="Skins\Knight\Run\Left\2.png" />
+    <Resource Include="Skins\Knight\Run\Left\3.png" />
+    <Resource Include="Skins\Knight\Run\Left\4.png" />
+    <Resource Include="Skins\Knight\Run\Left\5.png" />
+    <Resource Include="Skins\Knight\Run\Left\6.png" />
+    <Resource Include="Skins\Knight\Run\Left\7.png" />
+    <Resource Include="Skins\Knight\Run\Left\8.png" />
+    <Resource Include="Skins\Knight\Run\Left\9.png" />
+    <Resource Include="Skins\Knight\Run\Right\0.png" />
+    <Resource Include="Skins\Knight\Run\Right\1.png" />
+    <Resource Include="Skins\Knight\Run\Right\2.png" />
+    <Resource Include="Skins\Knight\Run\Right\3.png" />
+    <Resource Include="Skins\Knight\Run\Right\4.png" />
+    <Resource Include="Skins\Knight\Run\Right\5.png" />
+    <Resource Include="Skins\Knight\Run\Right\6.png" />
+    <Resource Include="Skins\Knight\Run\Right\7.png" />
+    <Resource Include="Skins\Knight\Run\Right\8.png" />
+    <Resource Include="Skins\Knight\Run\Right\9.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\0.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\1.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\2.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\3.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\4.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\5.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\6.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\7.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\8.png" />
+    <Resource Include="Skins\Wizard\Run\Back_Forward\9.png" />
+    <Resource Include="Skins\Wizard\Run\Left\0.png" />
+    <Resource Include="Skins\Wizard\Run\Left\1.png" />
+    <Resource Include="Skins\Wizard\Run\Left\2.png" />
+    <Resource Include="Skins\Wizard\Run\Left\3.png" />
+    <Resource Include="Skins\Wizard\Run\Left\4.png" />
+    <Resource Include="Skins\Wizard\Run\Left\5.png" />
+    <Resource Include="Skins\Wizard\Run\Left\6.png" />
+    <Resource Include="Skins\Wizard\Run\Left\7.png" />
+    <Resource Include="Skins\Wizard\Run\Left\8.png" />
+    <Resource Include="Skins\Wizard\Run\Left\9.png" />
+    <Resource Include="Skins\Wizard\Run\Right\0.png" />
+    <Resource Include="Skins\Wizard\Run\Right\1.png" />
+    <Resource Include="Skins\Wizard\Run\Right\2.png" />
+    <Resource Include="Skins\Wizard\Run\Right\3.png" />
+    <Resource Include="Skins\Wizard\Run\Right\4.png" />
+    <Resource Include="Skins\Wizard\Run\Right\5.png" />
+    <Resource Include="Skins\Wizard\Run\Right\6.png" />
+    <Resource Include="Skins\Wizard\Run\Right\7.png" />
+    <Resource Include="Skins\Wizard\Run\Right\8.png" />
+    <Resource Include="Skins\Wizard\Run\Right\9.png" />
+    <Resource Include="Skins\Bars\menu_background.png" />
+    <Content Include="Sounds\Quests\major3.mp3" />
+    <Content Include="Sounds\Tracks\ac3.mp3" />
+    <Content Include="Sounds\Tracks\Artemis.mp3" />
+    <Content Include="Sounds\Tracks\background_fight.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Tracks\Carol of the Bells.mp3" />
+    <Content Include="Sounds\Tracks\Fight.mp3" />
+    <Content Include="Sounds\Tracks\Take Flight.mp3" />
+    <Content Include="Sounds\Tracks\Vista Point menu.mp3" />
+    <Content Include="Sounds\Tracks\vista point.mp3" />
+    <Content Include="Sounds\Tracks\We Three Gentlemen.mp3" />
+    <Resource Include="Skins\Bars\quests.png" />
+    <Resource Include="Skins\Buttons\close.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_1.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_2.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_3.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_4.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_5.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_6.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_attack_1.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_attack_2.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_attack_3.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_attack_4.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_attack_5.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_attack_6.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_attack_7.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_dead_1.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_dead_2.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_dead_3.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_dead_4.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_dead_5.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_dead_6.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_dead_7.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_right_1.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_right_2.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_right_3.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_right_4.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_right_5.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_right_6.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_run_1.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_run_2.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_run_3.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_run_4.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_run_5.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_left_1.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_left_2.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_left_3.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_left_4.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_left_5.png" />
+    <Resource Include="Skins\Enemies\Pies\dog_left_6.png" />
+    <Content Include="Sounds\Quests\major1.mp3" />
+    <Content Include="Sounds\Quests\major2.mp3" />
+    <Content Include="Sounds\Quests\zubr.mp3" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
